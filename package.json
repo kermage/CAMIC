@@ -1,0 +1,36 @@
+{
+  "name": "camic",
+  "title": "CAMIC",
+  "version": "0.1.0",
+  "description": "Capture All Messages In Console",
+  "keywords": [
+    "element",
+    "pointer"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Gene Alyson Fortunado Torcende",
+    "email": "genealyson.torcende@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kermage/CAMIC.git"
+  },
+  "type": "module",
+  "files": [
+    "dist/"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.12.2",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.3",
+    "vite": "^5.2.7"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build"
+  }
+}
