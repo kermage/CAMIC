@@ -5,13 +5,50 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>CAMIC</title>
 		<link href="https://unpkg.com/modern-normalize" rel="stylesheet" />
+		<style>
+			header,
+			footer,
+			main {
+				padding: 1rem;
+			}
+
+			table {
+				width: 100%;
+				display: block;
+				table-layout: fixed;
+				border-collapse: collapse;
+			}
+
+			th,
+			td {
+				padding: 1rem;
+				border: 1px solid;
+				vertical-align: top;
+			}
+		</style>
 		<script type="module">
-			import CAMIC from '/src/index.ts';
+			import Alpine from 'https://unpkg.com/alpinejs?module';
+			import CAMIC, { TYPES } from '/src/index.ts';
 
-			window.iMsg = new CAMIC('log');
+			document.addEventListener('alpine:init', () => {
+				Alpine.data('messageLists', () => ({
+					types: TYPES,
+				}));
 
-			window.iMsg.hook((data) => console.warn(data));
-			window.iMsg.hook((data) => console.error(data));
+				Alpine.data('messageLister', (type) => ({
+					messages: [],
+
+					init() {
+						const iMsg = new CAMIC(type);
+
+						iMsg.hook((data) => {
+							this.messages.push(data);
+						});
+					},
+				}));
+			});
+
+			Alpine.start();
 		</script>
 		<!-- <script src="/browser.js" defer></script> -->
 	</head>
@@ -21,8 +58,35 @@
 			<h1>CAMIC, world!</h1>
 		</header>
 
-		<main>
-			<p>Go test and check console...</p>
+		<main x-data="messageLists">
+			<template x-for="type in types">
+				<div x-data="messageLister(type)" style="overflow: auto; margin-bottom: 2rem">
+					<h2 x-text="type.toUpperCase()"></h2>
+
+					<table>
+						<thead>
+							<th style="min-width: 160px">Timestamp</th>
+							<th width="100%">Arguments</th>
+						</thead>
+
+						<tbody>
+							<template x-for="message in messages">
+								<tr>
+									<td><em x-text="message.timestamp"></em></td>
+
+									<td>
+										<ol style="margin: 0; padding-left: 1.5rem">
+											<template x-for="argument in message.arguments">
+												<li><strong x-text="argument"></strong></li>
+											</template>
+										</ol>
+									</td>
+								</tr>
+							</template>
+						</tbody>
+					</table>
+				</div>
+			</template>
 		</main>
 
 		<footer>
