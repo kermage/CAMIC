@@ -8,11 +8,22 @@
 		<script type="module">
 			import CAMIC from '/src/index.ts';
 
-			new CAMIC();
+			window.iMsg = new CAMIC('log');
 		</script>
+		<!-- <script src="/browser.js" defer></script> -->
 	</head>
 
 	<body>
-		<h1>CAMIC, world!</h1>
+		<header>
+			<h1>CAMIC, world!</h1>
+		</header>
+
+		<main>
+			<p>Go test and check console...</p>
+		</main>
+
+		<footer>
+			<small>&copy; 2024 &mdash; GAFT. All Rights Reserved.</small>
+		</footer>
 	</body>
 </html>
