@@ -1,5 +1,5 @@
-import type { Structure, Type } from '../index';
+import type { Callback, Structure, Type } from '../index';
 import CAMIC from '../index';
 
 export default CAMIC;
-export { CAMIC, Structure, Type };
+export { CAMIC, Callback, Structure, Type };

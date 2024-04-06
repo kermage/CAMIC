@@ -9,6 +9,9 @@
 			import CAMIC from '/src/index.ts';
 
 			window.iMsg = new CAMIC('log');
+
+			window.iMsg.hook((data) => console.warn(data));
+			window.iMsg.hook((data) => console.error(data));
 		</script>
 		<!-- <script src="/browser.js" defer></script> -->
 	</head>
